@@ -8,7 +8,7 @@ class Student
 	std::string name;
 	std::string surname;
 	typedef std::map < const std::string, std::vector<float> > x;
-	double average_of_school_subjects[8];
+	double  average_of_school_subjects[8];
 	enum classroom {I,II,III,IV};
 	int class_;
 	x marks{
@@ -34,7 +34,7 @@ public:
 	void add_marks();
 	void delete_marks();
 	void modify_marks();
-	void show_1(const std::string& x) const ;
+	void show_1(const int n) ;
 	void edit(std::string& _name, std::string& _surname, int _class);
 	~Student() {};
 	friend std::ostream& operator<<(std::ostream& os, const Student& x);

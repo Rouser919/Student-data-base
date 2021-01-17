@@ -8,29 +8,41 @@ class Student
 	std::string name;
 	std::string surname;
 	typedef std::map < const std::string, std::vector<float> > x;
-	double average_of_school_subjects[8];
-	static x marks;
+	double  average_of_school_subjects[8];
 	enum classroom {I,II,III,IV};
+	int class_;
+	x marks{
+	{ "English",{} },
+	{"Mathematic",{}},
+	{ "Biology",{} },
+	{"History",{}},
+	{ "Physics",{} },
+	{"Chemistry",{}},
+	{ "Ethic/Religion",{} },
+	{"P.E",{}},
+	};
 	//static std::map<const std::string,double> average_of_school_subjects;
 	double average;
 	void set_ave_of_scho_sub();
 	void set_ave_marks();
 public:
-	Student(std::string& _name, std::string& _surname, int _class);
+	Student(std::string& _name, std::string& _surname, classroom _class);
 	Student();
 	Student(const Student& x);
 	Student& operator=(const Student& x);
-	void next_class();
+	void change_class(classroom n);
 	void add_marks();
 	void delete_marks();
 	void modify_marks();
+	void show_1(const int n) ;
 	void edit(std::string& _name, std::string& _surname, int _class);
 	~Student() {};
 	friend std::ostream& operator<<(std::ostream& os, const Student& x);
+};
 };0
 	*/
 void Student::set_ave_marks() {
-	average=std::accumulate(average_of_school_subjects[0], average_of_school_subjects[8], 0 )/8;
+	average=std::accumulate(average_of_school_subjects, average_of_school_subjects+8, 0 )/8;
 }
 void Student::set_ave_of_scho_sub() {
 	double sum;
@@ -70,6 +82,7 @@ Student& Student::operator=(const Student& x) {
 	surname = x.surname;
 	class_ = x.class_;
 	marks = x.marks;
+	return *this;
 }
 void Student::change_class(classroom n) {
 	if (n < 1 || n>4) {
@@ -174,11 +187,13 @@ void Student::add_marks() {
 
 
 	}
+	set_ave_of_scho_sub();
 }
 void Student::delete_marks(){
 	for (auto b : marks) {
 		b.second.clear();
 	}
+	set_ave_of_scho_sub();
 }
 void Student::modify_marks() {
 	char x;
@@ -193,7 +208,7 @@ void Student::modify_marks() {
 	while (std::cin >> x && x != 'K') {
 		switch (x) {
 		case(1):
-			show_1("English");
+			show_1(1);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -234,7 +249,7 @@ void Student::modify_marks() {
 			}
 			break;
 		case(2):
-			show_1("Mathematic");
+			show_1(2);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -275,7 +290,7 @@ void Student::modify_marks() {
 			}
 			break;
 		case(3):
-			show_1("Biology");
+			show_1(3);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -316,7 +331,7 @@ void Student::modify_marks() {
 			}
 			break;
 		case(4):
-			show_1("History");
+			show_1(4);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -357,7 +372,7 @@ void Student::modify_marks() {
 			}
 			break;
 		case(5):
-			show_1("Psyhics");
+			show_1(5);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -398,7 +413,7 @@ void Student::modify_marks() {
 			}
 			break;
 		case(6):
-			show_1("Chemistry");
+			show_1(6);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -439,7 +454,7 @@ void Student::modify_marks() {
 			}
 			break;
 		case(7):
-			show_1("Ethic/Religion");
+			show_1(7);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -480,7 +495,7 @@ void Student::modify_marks() {
 			}
 			break;
 		case(8):
-			show_1("P.E");
+			show_1(8);
 			std::cout << "Modify or erase?" << std::endl
 				<< "Click 1 for modify or 2 for erase element";
 			std::cin >> tmp;
@@ -531,11 +546,72 @@ void Student::modify_marks() {
 		<< "7.Ethic/Religion" << std::endl << "8.P.E" << std::endl <<
 		"Click K to exit" << std::endl;
 	}
+	set_ave_of_scho_sub();
 
 }
-void Student::show_1(const std::string &x)const {
+void Student::show_1(const int n) {
+	switch (n) {
+	case(1):
+		std::cout << "English marks" << std::endl;
+		for (int i = 0; i < marks["English"].size(); i++) {
+			std::cout << i << ": " << marks["English"][i] << std::endl;
+		}
+		break;
+	case(2):
+		std::cout << "Mathematic marks" << std::endl;
+		for (int i = 0; i < marks["Mathematic"].size(); i++) {
+			std::cout << i << ": " << marks["Mathematic"][i] << std::endl;
+		}
+		break;
+	case(3):
+		std::cout << "Biology marks" << std::endl;
+		for (int i = 0; i < marks["Biology"].size(); i++) {
+			std::cout << i << ": " << marks["Biology"][i] << std::endl;
+		}
+		break;
+	case(4):
+		std::cout << "History marks" << std::endl;
+		for (int i = 0; i < marks["History"].size(); i++) {
+			std::cout << i << ": " << marks["History"][i] << std::endl;
+		}
+		break;
+	case(5):
+		std::cout << "Psyhics marks" << std::endl;
+		for (int i = 0; i < marks["Psyhics"].size(); i++) {
+			std::cout << i << ": " << marks["Psyhics"][i] << std::endl;
+		}
+		break;
+	case(6):
+		std::cout << "Chemistry marks" << std::endl;
+		for (int i = 0; i < marks["Chemistry"].size(); i++) {
+			std::cout << i << ": " << marks["Chemistry"][i] << std::endl;
+		}
+		break;
+	case(7):
+		std::cout << "Ethic/Religion marks" << std::endl;
+		for (int i = 0; i < marks["Ethic/Religion"].size(); i++) {
+			std::cout << i << ": " << marks["Ethic/Religion"][i] << std::endl;
+		}
+		break;
+	case(8):
+		std::cout << "P.E marks" << std::endl;
+		for (int i = 0; i < marks["P.E"].size(); i++) {
+			std::cout << i << ": " << marks["P.E"][i] << std::endl;
+		}
+		break;
+
+	}
+}
+void Student::edit(std::string& _name, std::string& _surname, int _class) {
+	name = _name;
+	surname = _surname;
+	class_ = _class;
+}
+std::ostream& operator<<(std::ostream& os, const Student& x) {
 
 }
+
+
 
 
 
