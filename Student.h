@@ -9,10 +9,9 @@ class Student
 	std::string surname;
 	typedef std::map < const std::string, std::vector<float> > x;
 	double average_of_school_subjects[8];
-	static x marks;
 	enum classroom {I,II,III,IV};
 	int class_;
-	std::map < const std::string, std::vector<float>> marks{
+	x marks{
 	{ "English",{} },
 	{"Mathematic",{}},
 	{ "Biology",{} },
@@ -35,6 +34,7 @@ public:
 	void add_marks();
 	void delete_marks();
 	void modify_marks();
+	void show_1(const std::string& x) const ;
 	void edit(std::string& _name, std::string& _surname, int _class);
 	~Student() {};
 	friend std::ostream& operator<<(std::ostream& os, const Student& x);

@@ -176,6 +176,364 @@ void Student::add_marks() {
 	}
 }
 void Student::delete_marks(){
+	for (auto b : marks) {
+		b.second.clear();
+	}
+}
+void Student::modify_marks() {
+	char x;
+	char tmp;
+	char tmp_2;
+	std::cout << "Please choose what do you want to modify or erase element:" << std::endl
+		<< "1.English" << std::endl << "2.Mathematic" << std::endl
+		<< "3.Biology" << std::endl << "4.History" << std::endl
+		<< "5.Psyhics" << std::endl << "6.Chemistry" << std::endl
+		<< "7.Ethic/Religion" << std::endl << "8.P.E" << std::endl <<
+		"Click K to exit" << std::endl;
+	while (std::cin >> x && x != 'K') {
+		switch (x) {
+		case(1):
+			show_1("English");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["English"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["English"].insert(marks["English"].begin()+tmp,tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["English"].erase(marks["English"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		case(2):
+			show_1("Mathematic");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["Mathematic"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["Mathematic"].insert(marks["Mathematic"].begin() + tmp, tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["Mathematic"].erase(marks["Mathematic"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		case(3):
+			show_1("Biology");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["Biology"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["Biology"].insert(marks["Biology"].begin() + tmp, tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["Biology"].erase(marks["Biology"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		case(4):
+			show_1("History");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["History"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["History"].insert(marks["History"].begin() + tmp, tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["History"].erase(marks["History"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		case(5):
+			show_1("Psyhics");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["Psyhics"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["Psyhics"].insert(marks["Psyhics"].begin() + tmp, tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["Psyhics"].erase(marks["Psyhics"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		case(6):
+			show_1("Chemistry");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["Chemistry"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["Chemistry"].insert(marks["Chemistry"].begin() + tmp, tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["Chemistry"].erase(marks["Chemistry"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		case(7):
+			show_1("Ethic/Religion");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["Ethic/Religion"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["Ethic/Religion"].insert(marks["Ethic/Religion"].begin() + tmp, tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["Ethic/Religion"].erase(marks["Ethic/Religion"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		case(8):
+			show_1("P.E");
+			std::cout << "Modify or erase?" << std::endl
+				<< "Click 1 for modify or 2 for erase element";
+			std::cin >> tmp;
+			if (tmp == 1) {
+				std::cout << "What value u want to modify?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					if (marks["P.E"].size() > tmp && tmp >= 0) {
+						std::cout << "Enter new Value" << std::endl;
+						std::cin >> tmp_2;
+						if (isdigit(tmp_2)) {
+							marks["P.E"].insert(marks["P.E"].begin() + tmp, tmp_2);
+						}
+						else {
+							std::cout << "Invalid value" << std::endl
+								<< "Back to main console" << std::endl;
+							break;
+						}
+					}
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			else if (tmp == 2) {
+				std::cout << "What value u want to erase?" << std::endl;
+				std::cin >> tmp;
+				if (isdigit(tmp)) {
+					marks["P.E"].erase(marks["P.E"].begin() + tmp);
+				}
+				else {
+					std::cout << "Invalid value" << std::endl
+						<< "Back to main console" << std::endl;
+					break;
+				}
+			}
+			break;
+		default:
+			break;
+
+		}
+	std::cout << "Please choose what do you want to modify or erase element:" << std::endl
+		<< "1.English" << std::endl << "2.Mathematic" << std::endl
+		<< "3.Biology" << std::endl << "4.History" << std::endl
+		<< "5.Psyhics" << std::endl << "6.Chemistry" << std::endl
+		<< "7.Ethic/Religion" << std::endl << "8.P.E" << std::endl <<
+		"Click K to exit" << std::endl;
+	}
+
+}
+void Student::show_1(const std::string &x)const {
 
 }
 
