@@ -8,22 +8,36 @@ class Student
 	std::string name;
 	std::string surname;
 	typedef std::map < const std::string, std::vector<float> > x;
+	double average_of_school_subjects[8];
 	static x marks;
 	enum classroom {I,II,III,IV};
+	int class_;
+	std::map < const std::string, std::vector<float>> marks{
+	{ "English",{} },
+	{"Mathematic",{}},
+	{ "Biology",{} },
+	{"History",{}},
+	{ "Physics",{} },
+	{"Chemistry",{}},
+	{ "Ethic/Religion",{} },
+	{"P.E",{}},
+	};
+	//static std::map<const std::string,double> average_of_school_subjects;
 	double average;
-	void set_ave();
+	void set_ave_of_scho_sub();
+	void set_ave_marks();
 public:
-	Student(std::string& _name, std::string& _surname, int _class);
+	Student(std::string& _name, std::string& _surname, classroom _class);
 	Student();
 	Student(const Student& x);
 	Student& operator=(const Student& x);
+	void change_class(classroom n);
 	void add_marks();
 	void delete_marks();
 	void modify_marks();
 	void edit(std::string& _name, std::string& _surname, int _class);
 	~Student() {};
 	friend std::ostream& operator<<(std::ostream& os, const Student& x);
-
 };
 
 class Base {
@@ -33,7 +47,11 @@ public:
 	Base();
 	Base(int _count);
 	~Base() {};
-
+	void add();
+	void remove();
+	friend std::ostream& operator>>(std::ostream& os, const Student& x);
+	void read(FILE* fp);
+	void write(FILE* fp);
 
 
 
