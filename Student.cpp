@@ -2,7 +2,9 @@
 #include <iostream>
 #include <cctype>
 #include <string>
+#include <fstream>
 #include <windows.h>
+int Base::count = 0;
 static std::vector<std::string> subjects{
 { "English"},
 {"Mathematic"},
@@ -34,6 +36,15 @@ Student::Student(std::string& _name, std::string& _surname,int _class) {
 	class_ = _class;
 	add_marks();
 }
+Student::Student(std::string& _name, std::string& _surname, int _class, double ave[8], x& b, double aver) {
+	name = _name;
+	surname = _surname;
+	class_ = _class;
+	marks = b;
+	average = aver;
+	std::memcpy(average_of_school_subjects, ave, 8);
+
+}
 Student::Student() {
 	name="Empty";
 	surname = "Empty";
@@ -51,6 +62,8 @@ Student& Student::operator=(const Student& x) {
 	name = x.name;
 	surname = x.surname;
 	class_ = x.class_;
+	average = x.average;
+	std::memcpy(average_of_school_subjects, x.average_of_school_subjects, 8);
 	marks = x.marks;
 	return *this;
 }
@@ -172,6 +185,9 @@ void Student::show_1(const int n) {
 			std::cout << i << ": " << marks[n][i-1] << std::endl;
 		}
 }
+void Student::show_student(){
+	std::cout << name << " " << surname << " " << average << std::endl;
+}
 void Student::edit() {
 	std::cout << " Welcome to personal editor" << std::endl;
 	char c;
@@ -203,6 +219,22 @@ void Student::edit() {
 		std::cout << "Press 1 to edit name, 2 for surname or 3 for edit class. Press x for exit " << std::endl;
 	}
 }
+std::string &Student::copy() { // in feature delete, now for testing
+	std::string data;
+	data+= name + " " +surname + " Class:"+ std::to_string(class_) + " Average of marks:" + std::to_string(average) + " ";
+	int index = 0;
+	for (auto i : marks) {
+		data += subjects[index] + ": " + std::to_string(average_of_school_subjects[index]) + " Marks:";
+		for (auto b : marks[index]) {
+			data += std::to_string( b) + ",";
+		}
+		data += 'X';
+		data += '\n' + '\n';
+		index++;
+	}
+	return data;
+
+}
 std::ostream& operator<<(std::ostream& os, const Student& x) {
 	os << x.name << " " << x.surname << " Class:" << x.class_ << " Average of marks:" << x.average << " ";
 	int index = 0;
@@ -211,7 +243,8 @@ std::ostream& operator<<(std::ostream& os, const Student& x) {
 		for (auto b : x.marks[index]) {
 			os << b << ",";
 		}
-		os << "X";
+		os << 'X';// me control word to find for example in file.txt
+		os << std::endl << std::endl;
 		index++;
 	}
 	return os;
@@ -230,17 +263,15 @@ public:
 	void modify();
 	void remove();
 	void show_students();
-	friend std::ostream& operator>>(std::ostream& os, const Student& x);
 	void read();
 	void write();
 */
 Base::Base() {
 	std::unique_ptr<Student> ptr2x( new Student());
 	data.emplace_back(std::move(ptr2x)); 
-	count = 1;
+	count++;
 }
 Base::Base(int _count) {
-	count = 0;
 	while (count < _count) {
 		data.emplace_back(std::move(std::unique_ptr<Student>(new Student())));
 		count++;
@@ -263,7 +294,7 @@ void Base::menu() {
 	while (std::cin >> c && c != 'k') {
 		switch (c) {
 		case(1):
-			add();
+			add_for_menu();
 			data.back()->edit();
 			data.back()->add_marks();
 			break;
@@ -348,8 +379,13 @@ void Base::menu() {
 			std::endl << "Notice: Autosave will automate save base data to file base.txt at the end of the program" << std::endl;
 	}
 }
-void Base::add() {
-	data.emplace_back(std::move(std::unique_ptr<Student> (new Student())));
+void Base::add_for_menu() {
+	data.emplace_back(std::move(std::unique_ptr<Student>(new Student())));
+	count++;
+
+}
+void Base::add_for_read_file(const Student &x) {
+	data.emplace_back(std::move(std::unique_ptr<Student> (new Student(x))));
 	count++;
 }
 void Base::remove() {
@@ -366,6 +402,91 @@ void Base::remove() {
 		}
 		std::cout << "Press k to exit or insert new number" << std::endl;
 	}
+}
+void Base::show_students() {
+	int i = 1;
+	std::cout << "Students list:" << std::endl << "-------------------------------------------" 
+		<< std::endl<<"-------------------------------------------"<< std::endl;
+	for (auto& b : data) {
+		std::cout << i << ". ";
+		b->show_student();
+	}
+}
+std::ostream& operator<<(std::ostream& os, const Base& x){
+	os << (Student&)x;
+	return os;
+}
+
+void Base::read() {
+	std::cout << "Write there name of your data base" << std::endl;
+	std::cin >> file_name;
+	std::ifstream file;
+	file.open(file_name, 'r');
+	std::string tmp;
+	std::string tmp_name, tmp_surname;
+	int tmp_class;
+	double tmp_average;
+	double tmp_averages_subjects[8];
+	std::array<std::vector<double>, 8> c{};
+	int  index_o;
+	int max_mark, tmp_mark;
+	int count_x = 0;
+	while (std::getline(file, tmp)) {
+		if (tmp.size() > 4) {
+			index_o = tmp.find(' ');
+			tmp_name = tmp.substr(0, index_o);
+			tmp.erase(0, index_o ); //// remeber of one space; if needed +1 all index_o
+			index_o = tmp.find(' ');
+			tmp_surname = tmp.substr(0, index_o );
+			tmp.erase(0, index_o + 6); // because one space+ "class:" =7 pieces
+			index_o = tmp.find(' ');
+			/*
+				os << x.name << " " << x.surname << " Class:" << x.class_ << " Average of marks:" << x.average << " ";
+	int index = 0;
+	for (auto i : x.marks) {
+		os << subjects[index] << ": " << x.average_of_school_subjects[index] << " Marks:";
+		for (auto b : x.marks[index]) {
+			os << b << ",";
+		}
+		os << std::endl << std::endl;
+		index++;
+	}
+	return os;*/
+			tmp_class = std::stoi(tmp);
+			tmp.erase(0, index_o + 17);// because " Average of marks:" 18 pieces
+			index_o = tmp.find(' ');
+			tmp_average = std::stod(tmp);
+			tmp.erase(0, index_o);
+			while (count_x < 8) {
+				index_o = tmp.find(' ');
+				tmp_averages_subjects[count_x] = std::stod(tmp);
+				tmp.erase(0, index_o);
+				index_o = tmp.find(':');
+				tmp_mark = 0;
+				max_mark = tmp.find('X');
+				while (tmp_mark < max_mark) { // i use it for good validate marks
+					c[count_x].push_back(std::stoi(tmp));
+					tmp.erase(0, 2);
+					tmp_mark += 2;
+				}
+				count_x++;	
+			}
+			add_for_read_file(Student(tmp_name,tmp_surname,tmp_class,tmp_averages_subjects,c,tmp_average));
+			count++;
+		}
+	}
+	file.close();
+}
+void Base::write() {
+	int i = 0;
+	std::fstream file;
+	file.open(file_name, 'w+');
+	while (i < count) {
+		file<< data[count];
+		//std::cout << data[count]->copy();
+		count++;
+	}
+	file.close();
 }
 
 
