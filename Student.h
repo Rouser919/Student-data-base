@@ -3,34 +3,34 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include<array>
 class Student
 {
 	std::string name;
 	std::string surname;
-	typedef std::map < const std::string, std::vector<float> > x;
 	double  average_of_school_subjects[8];
-	enum classroom {I,II,III,IV};
 	int class_;
-	x marks{
-	{ "English",{} },
-	{"Mathematic",{}},
-	{ "Biology",{} },
-	{"History",{}},
-	{ "Physics",{} },
-	{"Chemistry",{}},
-	{ "Ethic/Religion",{} },
-	{"P.E",{}},
+	std::array<std::vector<double>, 8> marks{};
+	std::vector<std::string> subjects{
+	{ "English"},
+	{"Mathematic"},
+	{ "Biology"},
+	{"History"},
+	{ "Physics" },
+	{"Chemistry"},
+	{ "Ethic/Religion"},
+	{"P.E"}
 	};
-	//static std::map<const std::string,double> average_of_school_subjects;
 	double average;
 	void set_ave_of_scho_sub();
 	void set_ave_marks();
+	bool good_mark(int n) { if (n > 48 && n < 55) return 1; else return 0; }
 public:
-	Student(std::string& _name, std::string& _surname, classroom _class);
+	Student(std::string& _name, std::string& _surname, int _class);
 	Student();
 	Student(const Student& x);
 	Student& operator=(const Student& x);
-	void change_class(classroom n);
+	void change_class(int n);
 	void add_marks();
 	void delete_marks();
 	void modify_marks();
