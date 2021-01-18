@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cctype>
 #include <string>
+#include <windows.h>
 static std::vector<std::string> subjects{
 { "English"},
 {"Mathematic"},
@@ -253,11 +254,99 @@ void Base::menu() {
 	std::cout << "Welcome to main menu of the program" << std::endl
 		<< "---------------------------------------------------------------------------------------" << std::endl << std::endl
 		<< "Select options that you want:" << std::endl << "1.Add Student" << std::endl <<
-		"2.Modify Student" << std::endl << "3.Remove Student" << std::endl << "4.Show all Students" << std::endl
-		<< "5.Show all Students by name" << std::endl << "6.Show all Students by surname" << std::endl <<
-		"7.Show all Students by class" << std::endl << "8.Show all Students by best average mark" << std::endl <<
-		"9.Read base data from file" << std::endl << "10.Write base data to file" << std::endl <<
+		"2.Modify Student" << std::endl << "3.Remove Student" <<"4.Add Marks"<<std::endl<<"5.Modify marks/Delete marks"<<std::endl << "6.Delete all marks of student"<<std::endl<< "7.Show all Students" << std::endl
+		<< "8.Show all Students by name" << std::endl << "9.Show all Students by surname" << std::endl <<
+		"10.Show all Students by class" << std::endl << "11.Show all Students by best average mark" << std::endl <<
+		"12.Read base data from file" << std::endl << "13.Write base data to file" << std::endl <<
 		std::endl << "Notice: Autosave will automate save base data to file base.txt at the end of the program" << std::endl;
+	int c;
+	while (std::cin >> c && c != 'k') {
+		switch (c) {
+		case(1):
+			add();
+			data.back()->edit();
+			data.back()->add_marks();
+			break;
+		case(2):
+			std::cout << "Please type number of student that you want to modify";
+			show_students();
+			std::cin >> c;
+			if (validate_for_menu(c)) {
+				data[c - 1]->edit();
+				std::cout << "Succesfully modify!" << std::endl;
+			}
+			else {
+				std::cout << "Invalid value, back to main program" << std::endl;
+			}
+			break;
+		case(3):
+			std::cout << "Please type number of student that you want to delete";
+			show_students();
+			std::cin >> c;
+			if (validate_for_menu(c)) {
+				data.erase(data.begin() + c - 1);
+				std::cout << "Succesfully deleted!" << std::endl;
+			}
+			else {
+				std::cout << "Invalid value, back to main program" << std::endl;
+			}
+			break;
+		case(4):
+			std::cout << "Please type number of student that you want to add marks";
+			show_students();
+			std::cin >> c;
+			if (validate_for_menu(c)) {
+				data[c - 1]->add_marks();
+			}
+			else {
+				std::cout << "Invalid value, back to main program" << std::endl;
+			}
+			break;
+		case(5):
+			std::cout << "Please type number of student that you want to modify/delete marks";
+			show_students();
+			std::cin >> c;
+			if (validate_for_menu(c)) {
+				data[c - 1]->modify_marks();
+			}
+			else {
+				std::cout << "Invalid value, back to main program" << std::endl;
+			}
+			break;
+		case(6):
+			std::cout << "Please type number of student that you want to delete all marks";
+			show_students();
+			std::cin >> c;
+			if (validate_for_menu(c)) {
+				data[c - 1]->delete_marks();
+			}
+			else {
+				std::cout << "Invalid value, back to main program" << std::endl;
+			}
+			break;
+		case(7):
+			break;
+		case(8):
+			break;
+		case(9):
+			break;
+		case(10):
+			break;
+		default:
+			std::cout << "Invalid value, type again" << std::endl;
+			Sleep(3);
+			break;
+		}
+		std::cin.clear();
+		std::cout << "Welcome to main menu of the program" << std::endl
+			<< "---------------------------------------------------------------------------------------" << std::endl << std::endl
+			<< "Select options that you want:" << std::endl << "1.Add Student" << std::endl <<
+			"2.Modify Student" << std::endl << "3.Remove Student" << "4.Add Marks" << std::endl << "5.Modify marks/Delete marks" << std::endl << "6.Delete all marks of student" << std::endl << "7.Show all Students" << std::endl
+			<< "8.Show all Students by name" << std::endl << "9.Show all Students by surname" << std::endl <<
+			"10.Show all Students by class" << std::endl << "11.Show all Students by best average mark" << std::endl <<
+			"12.Read base data from file" << std::endl << "13.Write base data to file" << std::endl <<
+			std::endl << "Notice: Autosave will automate save base data to file base.txt at the end of the program" << std::endl;
+	}
 }
 void Base::add() {
 	data.emplace_back(std::move(std::unique_ptr<Student> (new Student())));

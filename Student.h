@@ -35,6 +35,7 @@ class Base {
 	std::vector<std::unique_ptr<Student>> data;// https://cpp-polska.pl/post/kompendium-wiedzy-o-smart-pointerach
 	static int count;
 	std::string file_name;
+	bool validate_for_menu(int c) { if (isdigit(c) && c <= data.size() && c > 0) return 1; else return 0; }
 public:
 	Base();
 	Base(int _count);
