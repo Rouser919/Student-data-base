@@ -1,6 +1,6 @@
 # Student-data-base
 C++ 
-In future i will add mysql base option to this project
+In future i will add mysql base option to this project, maybe qt to better visual face.
 
 17.01.2021 Add base class with some definitions  Add functions to modify/erase/add marks
 
