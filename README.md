@@ -6,4 +6,4 @@ In future i will add mysql base option to this project, maybe qt to better visua
 
 18.01.2021 Optimize functions, add main menu,functions to add to base or remove, add some menu options. (Update) Functions to write and read base from file, add functions to show all students. Tomorrow i plan bugfix this project and add new features.
 
-19.01.2021 Bugfix all functions without read
+19.01.2021 Bugfix all functions without read. (Update) Finish other functions(sorts,shows). Repair function write and read, ugfix other functions without sorts. Sorts i will bugfix tomorrow. In the next day i will probably finish projects with bugfix and other stuff.
