@@ -17,13 +17,18 @@ static std::vector<std::string> subjects{
 };
 void Student::set_ave_of_scho_sub() {
 	double sum;
-	int count, i = 0;
+	double count;
+	int i = 0;
 	for (auto &b : marks) {
 		count = 0;
 		sum = 0;
 		for (auto &c : b) {
 			sum += c;
 			count++;
+		}
+		if (b.size() == 0) {
+			sum = 1;
+			count = 1;
 		}
 		average_of_school_subjects[i]= sum / count;
 		i++;
@@ -111,7 +116,7 @@ void Student::add_marks() {
 	set_ave_of_scho_sub();
 }
 void Student::delete_marks(){
-	for (auto b : marks) {
+	for (auto &b : marks) {
 		b.clear();
 	}
 	set_ave_of_scho_sub();
@@ -186,30 +191,38 @@ void Student::show_1(const int n) {
 		}
 }
 void Student::show_student(){
-	std::cout << name << " " << surname << " " << average << std::endl;
+	std::cout <<"     "<< name << "         " << surname << "            " << average << std::endl;
 }
 void Student::edit() {
-	std::cout << " Welcome to personal editor" << std::endl;
+	std::cout << "Welcome to personal editor" << std::endl;
 	char c;
+	int tmp;
 	std::cout << "Press 1 to edit name, 2 for surname or 3 for edit class. Press x for exit " << std::endl;
 	while (std::cin >> c && c != 'x') {
 		switch (c - 48) {
 		case(1):
 			std::cout << "Type name " << std::endl;
 			std::cin >> name;
-			std::cout << "You write" << name << " Back to the menu" << std::endl;
+			std::cout << "You write " << name <<  std::endl;
 			std::cin.clear();
 			break;
 		case(2):
 			std::cout << "Type surname " << std::endl;
 			std::cin >> surname;
-			std::cout << "You write" << surname << " Back to the menu" << std::endl;
+			std::cout << "You write " << surname << std::endl;
 			std::cin.clear();
 			break;
 		case(3):
-			std::cout << "Type name " << std::endl;
-			std::cin >> class_;
-			std::cout << "You write" << class_ << " Back to the menu" << std::endl;
+			std::cout << "Type class " << std::endl;
+			std::cin >> tmp;
+			if (good_class(tmp)) {
+				class_ = tmp;
+				std::cout << "You write " << class_ << std::endl;
+			}
+			else {
+				std::cout << "Invalid value" << std::endl;
+			}
+
 			std::cin.clear();
 			break;
 		default:
@@ -219,7 +232,21 @@ void Student::edit() {
 		std::cout << "Press 1 to edit name, 2 for surname or 3 for edit class. Press x for exit " << std::endl;
 	}
 }
-std::string &Student::copy() { // in feature delete, now for testing
+void Student::write_s(std::fstream& x) {
+	x<<  name << " " << surname << " Class:" <<class_ << " Average of marks:" << average << " ";
+	int index = 0;
+	for (auto i : marks) {
+		x << subjects[index] << ": " << average_of_school_subjects[index] << " Marks:";
+		for (auto b : marks[index]) {
+			x << b << ",";
+		}
+		x << 'X';// me control word to find for example in file.txt
+		index++;
+	}
+	x << std::endl << std::endl;
+
+}
+std::string Student::copy() { // in feature delete, now for testing
 	std::string data;
 	data+= name + " " +surname + " Class:"+ std::to_string(class_) + " Average of marks:" + std::to_string(average) + " ";
 	int index = 0;
@@ -244,9 +271,9 @@ std::ostream& operator<<(std::ostream& os, const Student& x) {
 			os << b << ",";
 		}
 		os << 'X';// me control word to find for example in file.txt
-		os << std::endl << std::endl;
 		index++;
 	}
+	os << std::endl << std::endl;
 	return os;
 }
 /*
@@ -267,15 +294,15 @@ public:
 	void write();
 */
 Base::Base() {
-	std::unique_ptr<Student> ptr2x( new Student());
-	data.emplace_back(std::move(ptr2x)); 
-	count++;
+	file_name = "file.txt";
+
 }
 Base::Base(int _count) {
 	while (count < _count) {
 		data.emplace_back(std::move(std::unique_ptr<Student>(new Student())));
 		count++;
 	}
+	file_name = "file.txt";
 
 }	
 Base::~Base() {
@@ -285,7 +312,7 @@ void Base::menu() {
 	std::cout << "Welcome to main menu of the program" << std::endl
 		<< "---------------------------------------------------------------------------------------" << std::endl << std::endl
 		<< "Select options that you want:" << std::endl << "1.Add Student" << std::endl <<
-		"2.Modify Student" << std::endl << "3.Remove Student" <<"4.Add Marks"<<std::endl<<"5.Modify marks/Delete marks"<<std::endl << "6.Delete all marks of student"<<std::endl<< "7.Show all Students" << std::endl
+		"2.Modify Student" << std::endl << "3.Remove Student" <<std::endl<<"4.Add Marks"<<std::endl<<"5.Modify marks/Delete marks"<<std::endl << "6.Delete all marks of student"<<std::endl<< "7.Show all Students" << std::endl
 		<< "8.Show all Students by name" << std::endl << "9.Show all Students by surname" << std::endl <<
 		"10.Show all Students by class" << std::endl << "11.Show all Students by best average mark" << std::endl <<
 		"12.Read base data from file" << std::endl << "13.Write base data to file" << std::endl <<
@@ -299,19 +326,19 @@ void Base::menu() {
 			data.back()->add_marks();
 			break;
 		case(2):
-			std::cout << "Please type number of student that you want to modify";
 			show_students();
+			std::cout << "Please type number of student that you want to modify" << std::endl;
 			std::cin >> c;
 			if (validate_for_menu(c)) {
 				data[c - 1]->edit();
-				std::cout << "Succesfully modify!" << std::endl;
+				std::cout << "Succesfully modify!" << std::endl;		
 			}
 			else {
 				std::cout << "Invalid value, back to main program" << std::endl;
 			}
 			break;
 		case(3):
-			std::cout << "Please type number of student that you want to delete";
+			std::cout << "Please type number of student that you want to delete"<< std::endl;
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -323,7 +350,7 @@ void Base::menu() {
 			}
 			break;
 		case(4):
-			std::cout << "Please type number of student that you want to add marks";
+			std::cout << "Please type number of student that you want to add marks" << std ::endl;
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -334,7 +361,7 @@ void Base::menu() {
 			}
 			break;
 		case(5):
-			std::cout << "Please type number of student that you want to modify/delete marks";
+			std::cout << "Please type number of student that you want to modify/delete marks" << std::endl;
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -345,7 +372,7 @@ void Base::menu() {
 			}
 			break;
 		case(6):
-			std::cout << "Please type number of student that you want to delete all marks";
+			std::cout << "Please type number of student that you want to delete all marks" << std::endl;
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -363,16 +390,26 @@ void Base::menu() {
 			break;
 		case(10):
 			break;
+		case(11):
+			break;
+			read();
+		case(12):
+			break;
+		case(13):
+			write();
+			break;
+
 		default:
 			std::cout << "Invalid value, type again" << std::endl;
 			Sleep(3);
 			break;
 		}
+		Sleep(1000);
 		std::cin.clear();
 		std::cout << "Welcome to main menu of the program" << std::endl
 			<< "---------------------------------------------------------------------------------------" << std::endl << std::endl
 			<< "Select options that you want:" << std::endl << "1.Add Student" << std::endl <<
-			"2.Modify Student" << std::endl << "3.Remove Student" << "4.Add Marks" << std::endl << "5.Modify marks/Delete marks" << std::endl << "6.Delete all marks of student" << std::endl << "7.Show all Students" << std::endl
+			"2.Modify Student" << std::endl << "3.Remove Student" <<std::endl << "4.Add Marks" << std::endl << "5.Modify marks/Delete marks" << std::endl << "6.Delete all marks of student" << std::endl << "7.Show all Students" << std::endl
 			<< "8.Show all Students by name" << std::endl << "9.Show all Students by surname" << std::endl <<
 			"10.Show all Students by class" << std::endl << "11.Show all Students by best average mark" << std::endl <<
 			"12.Read base data from file" << std::endl << "13.Write base data to file" << std::endl <<
@@ -405,18 +442,20 @@ void Base::remove() {
 }
 void Base::show_students() {
 	int i = 1;
-	std::cout << "Students list:" << std::endl << "-------------------------------------------" 
-		<< std::endl<<"-------------------------------------------"<< std::endl;
-	for (auto& b : data) {
+	std::cout << "Students list:" << std::endl << "-------------------------------------------"
+		<< std::endl << "-------------------------------------------" << std::endl <<
+		"Lp.     Name       Surname       Average" << std::endl << "-------------------------------------------" << std::endl;
+	for(auto &b:data) {
 		std::cout << i << ". ";
 		b->show_student();
+		i++;
 	}
+	std::cout << std::endl;
 }
 std::ostream& operator<<(std::ostream& os, const Base& x){
 	os << (Student&)x;
 	return os;
 }
-
 void Base::read() {
 	std::cout << "Write there name of your data base" << std::endl;
 	std::cin >> file_name;
@@ -480,12 +519,11 @@ void Base::read() {
 void Base::write() {
 	int i = 0;
 	std::fstream file;
-	file.open(file_name, 'w+');
-	while (i < count) {
-		file<< data[count];
-		//std::cout << data[count]->copy();
-		count++;
+	file.open(file_name, std::ios::out);
+	for (auto& b : data) {
+		b->write_s(file);
 	}
+	std::cout << " Succesfully writed!" << std::endl;
 	file.close();
 }
 
