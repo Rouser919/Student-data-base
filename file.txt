@@ -1,6 +1,26 @@
-Mateusz Paszkot Class:4 Average of marks:3 English: 3.66667 Marks:2,5,4,XMathematic: -6.27744e+66 Marks:5,6,3,XBiology: -6.27744e+66 Marks:5,3,2,XHistory: -6.27744e+66 Marks:5,6,2,XPhysics: -6.27744e+66 Marks:6,2,3,XChemistry: -6.27744e+66 Marks:6,2,3,XEthic/Religion: -6.27744e+66 Marks:2,4,XP.E: -6.27744e+66 Marks:3,5,X
+Anna Kucharczyk Class:1 Average of marks:4.75 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
 
-Anna Paczka Class:3 Average of marks:1 English: 3.66667 Marks:2,5,4,XMathematic: -6.27744e+66 Marks:5,6,3,XBiology: -6.27744e+66 Marks:5,3,2,XHistory: -6.27744e+66 Marks:5,6,2,XPhysics: -6.27744e+66 Marks:6,2,3,XChemistry: -6.27744e+66 Marks:6,2,3,XEthic/Religion: -6.27744e+66 Marks:2,4,XP.E: -6.27744e+66 Marks:3,5,X
+Bartlomiej Grodzki Class:1 Average of marks:2.5 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
 
-Marek Konieczny Class:2 Average of marks:4.375 English: 3 Marks:2,4,XMathematic: 4.5 Marks:5,4,XBiology: 4.5 Marks:5,4,XHistory: 5.5 Marks:6,5,XPhysics: 5.5 Marks:6,5,XChemistry: 3 Marks:2,4,XEthic/Religion: 4.5 Marks:6,3,XP.E: 4.5 Marks:5,4,X
+Patryk Zajac Class:1 Average of marks:2.375 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Alicja Kijewska Class:2 Average of marks:2.375 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Kamil Paciora Class:2 Average of marks:2.72917 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Mateusz Rudzki Class:2 Average of marks:1 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Piotr Kuczma Class:3 Average of marks:3.25 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Andrzej Lipkowski Class:3 Average of marks:3.875 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Jan Stalmach Class:3 Average of marks:4.25 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Marta Kowalczyk Class:3 Average of marks:4.375 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Lukasz Bielik Class:4 Average of marks:1.5 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Katarzyna Kubowicz Class:4 Average of marks:2.625 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+
+Karolina Majka Class:4 Average of marks:2.625 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
 

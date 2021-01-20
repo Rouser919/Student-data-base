@@ -4,8 +4,8 @@
 #include <string>
 #include <fstream>
 #include <windows.h>
-#include <iomanip>
 #include <algorithm>
+#include <iomanip>
 int Base::count = 0;
 static std::vector<std::string> subjects{
 { "English"},
@@ -37,19 +37,31 @@ void Student::set_ave_of_scho_sub() {
 	}
 	set_ave_marks();
 }
+std::string& Student::parse(std::string &x) { 
+	int c = 0; 
+	for (auto& b : x){ 
+		if (!isalpha(b)) { x.erase(x.begin() + c); c--; };
+		c++; 
+	}
+	return x;
+}
 Student::Student(std::string& _name, std::string& _surname,int _class) {
 	name = _name;
+	parse(name);
 	surname = _surname;
+	parse(surname);
 	class_ = _class;
 	add_marks();
 }
 Student::Student(std::string& _name, std::string& _surname, int _class, double ave[8], x& b, double aver) {
 	name = _name;
+	parse(name);
 	surname = _surname;
+	parse(surname);
 	class_ = _class;
 	marks = b;
 	average = aver;
-	std::memcpy(average_of_school_subjects, ave, 8);
+	std::memcpy(average_of_school_subjects, ave,sizeof(double )*8);
 
 }
 Student::Student() {
@@ -63,7 +75,7 @@ Student::Student(const Student& x) {
 	class_ = x.class_;
 	marks = x.marks;
 	average = x.average;
-	std::memcpy(average_of_school_subjects, x.average_of_school_subjects, 8);
+	std::memcpy(average_of_school_subjects, x.average_of_school_subjects, sizeof(double)*8);
 }
 Student& Student::operator=(const Student& x) {
 	name = x.name;
@@ -86,7 +98,7 @@ void Student::change_class(int n) {
 void Student::add_marks() {
 	char x;
 	char tmp;
-	std::cout << "Please choose what do you want:" << std::endl
+	std::cout << "Please choose subject if you want to new marks" << std::endl
 		<< "1.English" << std::endl << "2.Mathematic" << std::endl
 		<< "3.Biology" << std::endl << "4.History" << std::endl
 		<< "5.Psyhics" << std::endl << "6.Chemistry" << std::endl
@@ -98,7 +110,12 @@ void Student::add_marks() {
 			std::cin >> tmp;
 			while  (tmp != 'x') {
 				if (good_mark(tmp)) {
-					marks[x-49].push_back(std::stoi(&tmp));
+					if(marks[x-49].size()==1){
+						marks[x - 49][0] = std::stoi(&tmp);
+					}
+					else {
+						marks[x - 49].push_back(std::stoi(&tmp));
+					}
 					std::cout << "Succesfully added!" << std::endl
 						<< "Click x to exit or add new mark" << std::endl;
 				}
@@ -108,7 +125,7 @@ void Student::add_marks() {
 				std::cin >> tmp;
 			}
 		}
-		std::cout << "Please choose what do you want:" << std::endl
+		std::cout << "Please choose subject if you want to new marks" << std::endl
 			<< "1.English" << std::endl << "2.Mathematic" << std::endl
 			<< "3.Biology" << std::endl << "4.History" << std::endl
 			<< "5.Psyhics" << std::endl << "6.Chemistry" << std::endl
@@ -127,7 +144,7 @@ void Student::modify_marks() {
 	char x;
 	char tmp;
 	char tmp_2;
-	std::cout << "Please choose what do you want to modify or erase element:" << std::endl
+	std::cout << "Please choose subject that you want to modify or erase marks:" << std::endl
 		<< "1.English" << std::endl << "2.Mathematic" << std::endl
 		<< "3.Biology" << std::endl << "4.History" << std::endl
 		<< "5.Psyhics" << std::endl << "6.Chemistry" << std::endl
@@ -141,12 +158,16 @@ void Student::modify_marks() {
 		if (tmp == '1') {
 			std::cout << "What value u want to modify?" << std::endl;
 			std::cin >> tmp;
-			if (isdigit(tmp)) {
 				if (marks[x-49].size() > tmp-48 && tmp-48 >= 0) {
 					std::cout << "Enter new Value" << std::endl;
 					std::cin >> tmp_2;
 					if (good_mark(tmp_2)) {
-						marks[x - 49][tmp - 49] = std::stoi(&tmp_2);
+						if (marks[x - 49].size() == 1) {
+							marks[x - 49][0] = std::stoi(&tmp);
+						}
+						else {
+							marks[x - 49][tmp - 49] = std::stoi(&tmp_2);
+						}
 						std::cout << "After change: " << std::endl;
 						show_1((x - 49));
 					}
@@ -155,7 +176,6 @@ void Student::modify_marks() {
 							<< "Back to main console" << std::endl;
 					}
 				}
-			}
 			else {
 				std::cout << "Invalid value" << std::endl
 					<< "Back to main console" << std::endl;
@@ -175,12 +195,12 @@ void Student::modify_marks() {
 			}
 		}
 
-		std::cout << "Please choose what do you want to modify or erase element:" << std::endl
+		std::cout << "Please choose subject that you want to modify or erase marks:" << std::endl
 			<< "1.English" << std::endl << "2.Mathematic" << std::endl
 			<< "3.Biology" << std::endl << "4.History" << std::endl
 			<< "5.Psyhics" << std::endl << "6.Chemistry" << std::endl
 			<< "7.Ethic/Religion" << std::endl << "8.P.E" << std::endl <<
-			"Click k to exit" << std::endl;
+			"Click K to exit" << std::endl;
 	}
 	std::cin.clear();
 
@@ -192,9 +212,49 @@ void Student::show_1(const int n) {
 			std::cout << i << ": " << marks[n][i-1] << std::endl;
 		}
 }
-void Student::show_student(){
-	//std::cout.width()
-	std::cout <<"	"<< name << "	" << surname << "		" << class_<<"		" <<(double)average<< std::endl;
+// lambda
+void Student::show_student(int n) { 
+	auto b = [&n]()->int {
+		int c = 0;
+		while (n > 0) {
+			n /= 10;
+			c++;
+		}
+		return c; 
+	};
+
+	int i = b()+1; // because dot
+	while (i < 8) {
+		std::cout << " ";
+		i++;
+	}
+	std::cout << name;
+	i +=name.size();
+	while (i < 23) {
+		std::cout << " ";
+		i++;
+	}
+	std::cout << surname;
+	i += surname.size();
+	while (i < 38) {
+		std::cout << " ";
+		i++;
+
+	}
+	std::cout << class_ << "        " <<std::fixed<<std::setprecision(2) << (double)average << std::endl;
+} 
+void Student::show_for_menu_person() {
+	std::cout << name << " " << surname << " Class:" << class_ << " Average of marks:" << average << " "<<std::endl;
+	int index = 0;
+	for (auto i : marks) {
+		std::cout<< subjects[index] << ": " << average_of_school_subjects[index] << " Marks:";
+		for (auto b : marks[index]) {
+			std::cout << b << ",";
+		}
+		index++;
+		std::cout << std::endl;
+	}
+
 }
 void Student::edit() {
 	std::cout << "Welcome to personal editor" << std::endl;
@@ -207,6 +267,7 @@ void Student::edit() {
 			std::cout << "Type name " << std::endl;
 			std::cin >> name;
 			name[0] = toupper(name[0]);
+			parse(name);
 			std::cout << "You write " << name <<  std::endl;
 			std::cin.clear();
 			break;
@@ -214,6 +275,7 @@ void Student::edit() {
 			std::cout << "Type surname " << std::endl;
 			std::cin >> surname;
 			surname[0] = toupper(surname[0]);
+			parse(surname);
 			std::cout << "You write " << surname << std::endl;
 			std::cin.clear();
 			break;
@@ -237,12 +299,29 @@ void Student::edit() {
 		std::cout << "Press 1 to edit name, 2 for surname or 3 for edit class. Press x for exit " << std::endl;
 	}
 }
+void Student::add_personal() {
+	int tmp;
+	std::cout << "Type name of Student" << std::endl;
+	std::cin >> name;
+	parse(name);
+	std::cin.clear();
+	std::cout << "Type surname of Student" << std::endl;
+	std::cin >> surname;
+	parse(surname);
+	std::cin.clear();
+	std::cout << "Type class of Student" << std::endl;
+	while (std::cin >> tmp && !good_class(tmp)) {
+		std::cout << "Invalid value" << std::endl << "Type again:" << std::endl;
+	}
+	class_ = tmp;
+	std::cin.clear();
+}
 void Student::write_file_s(std::fstream& x) {
-	x<<  name << " " << surname << " Class:" <<class_ << " Average of marks:" << average << " ";
+	x << name << " " << surname << " Class:" << class_ << " Average of marks:" << average << " ";
 	int index = 0;
-	for (auto i : marks) {
+	for (auto &i : marks) {
 		x << subjects[index] << ": " << average_of_school_subjects[index] << " Marks:";
-		for (auto b : marks[index]) {
+		for (auto &b : marks[index]) {
 			x << b << ",";
 		}
 		x << 'X';// me control word to find for example in file.txt
@@ -259,14 +338,13 @@ std::ostream& operator<<(std::ostream& os, const Student& x) {
 		for (auto b : x.marks[index]) {
 			os << b << ",";
 		}
-		os << 'X';// me control word to find for example in file.txt
 		index++;
+		os << std::endl;
 	}
-	os << std::endl << std::endl;
 	return os;
 }
 void Base::change_name_student() {
-	std::cout << "Type new name of file.txt" << std::endl;
+	std::cout << "Type new name file to write" << std::endl;
 	std::cin >> file_name_write;
 	std::cin.clear();
 	std::cout << "You typed " << file_name_write << " . Succesfully change!" << std::endl;
@@ -284,32 +362,23 @@ Base::Base(int _count) {
 
 }	
 Base::~Base() {
+	sort_by_var(0, 1);
 	write_file_b();
 };
 void Base::menu() {
-
-	std::cout << "			Welcome to main menu of the program" << std::endl
-		<< "---------------------------------------------------------------------------------------" << std::endl << std::endl
-		<< "				Made by Mateusz Stopa" << std::endl << "---------------------------------------------------------------------------------------" << std::endl << std::endl
-		<< "Select options that you want:" << std::endl << "1.Add Student" << std::endl <<
-		"2.Modify Student" << std::endl << "3.Remove Student" << std::endl << "4.Add Marks" << std::endl << "5.Modify marks/Delete marks" << std::endl << "6.Delete all marks of student" << std::endl << "7.Show all Students" << std::endl
-		<< "8.Show all Students by name" << std::endl << "9.Show all Students by surname" << std::endl <<
-		"10.Show all Students by class" << std::endl << "11.Show all Students by best average mark" << std::endl <<
-		"12.Menu sort" << std::endl <<
-		"13.Read base data from file" << std::endl << "14.Write base data to file" << std::endl << "15.Specify name of file to write" << std::endl <<
-		"Press k to exit" << std::endl <<
-		std::endl << "Notice: Autosave will automate save base data to file: " << file_name_write << " at the end of the program" << std::endl;
+	show_menu();
 	int c;
 	while (std::cin >> c && c != 'k') {
 		switch (c) {
 		case(1):
 			add_for_menu();
-			data.back()->edit();
+			data.back()->add_personal();
 			data.back()->add_marks();
 			break;
 		case(2):
 			show_students();
-			std::cout << "Please type number of student that you want to modify" << std::endl;
+			std::cout << "Please type number of Student that you want to modify" << std::endl;
+			Sleep(1000);
 			std::cin >> c;
 			if (validate_for_menu(c)) {
 				data[c - 1]->edit();
@@ -320,7 +389,8 @@ void Base::menu() {
 			}
 			break;
 		case(3):
-			std::cout << "Please type number of student that you want to delete"<< std::endl;
+			std::cout << "Please type number of Student that you want to delete"<< std::endl;
+			Sleep(1000);
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -332,7 +402,8 @@ void Base::menu() {
 			}
 			break;
 		case(4):
-			std::cout << "Please type number of student that you want to add marks" << std ::endl;
+			std::cout << "Please type number of Student that you want to add marks" << std ::endl;
+			Sleep(1000);
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -343,7 +414,8 @@ void Base::menu() {
 			}
 			break;
 		case(5):
-			std::cout << "Please type number of student that you want to modify/delete marks" << std::endl;
+			std::cout << "Please type number of Student that you want to modify/delete marks" << std::endl;
+			Sleep(1000);
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -354,7 +426,8 @@ void Base::menu() {
 			}
 			break;
 		case(6):
-			std::cout << "Please type number of student that you want to delete all marks" << std::endl;
+			std::cout << "Please type number of Student that you want to delete all marks" << std::endl;
+			Sleep(1000);
 			show_students();
 			std::cin >> c;
 			if (validate_for_menu(c)) {
@@ -365,30 +438,46 @@ void Base::menu() {
 			}
 			break;
 		case(7):
+			std::cout << "Please type number of Student that you want to show" << std::endl;
+			Sleep(1000);
 			show_students();
+			std::cin >> c;
+			if (validate_for_menu(c)) {
+				data[c - 1]->show_for_menu_person();
+				Sleep(3000);
+			}
+			else {
+				std::cout << "Invalid value, back to main program" << std::endl;
+
+			}
 			break;
+
 		case(8):
-			show_by_name();
+			show_students();
+			Sleep(1000);
 			break;
 		case(9):
-			show_by_surname();
+			show_by_name();
 			break;
 		case(10):
-			show_by_class();
+			show_by_surname();
 			break;
 		case(11):
-			show_by_mark();
+			show_by_class();
 			break;
 		case(12):
-			menu_for_sort();
+			show_by_mark();
 			break;
 		case(13):
-			read();
+			menu_for_sort();
 			break;
 		case(14):
-			write_file_b();
+			read();
 			break;
 		case(15):
+			write_file_b();
+			break;
+		case(16):
 			change_name_student();
 			break;
 		default:
@@ -397,72 +486,43 @@ void Base::menu() {
 		}
 		Sleep(1000);
 		std::cin.clear();
-		std::cout << "			Welcome to main menu of the program" << std::endl
-			<< "---------------------------------------------------------------------------------------" << std::endl << std::endl
-			<< "				Made by Mateusz Stopa" << std::endl << "---------------------------------------------------------------------------------------" << std::endl << std::endl
-			<< "Select options that you want:" << std::endl << "1.Add Student" << std::endl <<
-			"2.Modify Student" << std::endl << "3.Remove Student" << std::endl << "4.Add Marks" << std::endl << "5.Modify marks/Delete marks" << std::endl << "6.Delete all marks of student" << std::endl << "7.Show all Students" << std::endl
-			<< "8.Show all Students by name" << std::endl << "9.Show all Students by surname" << std::endl <<
-			"10.Show all Students by class" << std::endl << "11.Show all Students by best average mark" << std::endl <<
-			"12.Menu sort" << std::endl <<
-			"13.Read base data from file" << std::endl << "14.Write base data to file" << std::endl << "15.Specify name of file to write" << std::endl <<
-			"Press k to exit" << std::endl <<
-			std::endl << "Notice: Autosave will automate save base data to file: " << file_name_write << " at the end of the program" << std::endl;
+		show_menu();
 	}
 }
 void Base::menu_for_sort() {
 	char i;
 	std::cout << "Welcome to sort menu" << std::endl <<
-		"1. Sort by name falling" << std::endl << "2. Sort by name raising" << std::endl <<
-		"3. Sort by surname falling" << std::endl << "4. Sort by surname raising" << std::endl <<
-		"5. Sort by average falling" << std::endl << "6. Sort by average raising" << std::endl <<
-		"7. Sort by class falling" << std::endl << "8. Sort by class raising" << std::endl <<
+		"1. Sort by name raising" << std::endl << "2. Sort by name falling" << std::endl <<
+		"3. Sort by surname raising" << std::endl << "4. Sort by surname falling" << std::endl <<
+		"5. Sort by average raising" << std::endl << "6. Sort by average falling" << std::endl <<
+		"7. Sort by class raising" << std::endl << "8. Sort by class falling" << std::endl <<
 		"Press x to exit" << std::endl << "---------------------------------------------------------------------------------------"
 		<< std::endl;
-	std::string tmp_str;
-	double tmp_db;
-	int tmp_int;	
 	while (std::cin >> i && i != 'x') {
 		switch (i-48) {
 		case(1):
-			std::cout << "Type name to sort" << std::endl;
-			std::cin >> tmp_str;
-			sort_by(tmp_str, 0, 0);
+			sort_by_str(0, 0);
 			break;
 		case(2):
-			std::cout << "Type name to sort" << std::endl;
-			std::cin >> tmp_str;
-			sort_by(tmp_str, 0, 1);
+			sort_by_str( 1, 0);
 			break;
 		case(3):
-			std::cout << "Type surname to sort" << std::endl;
-			std::cin >> tmp_str;
-			sort_by(tmp_str, 1, 0);
+			sort_by_str(0, 1);
 			break;
 		case(4):
-			std::cout << "Type surname to sort" << std::endl;
-			std::cin >> tmp_str;
-			sort_by(tmp_str, 1, 1);
+			sort_by_str(1, 1);
 			break;
 		case(5):
-			std::cout << "Type number to sort" << std::endl;
-			std::cin >> tmp_db;
-			sort_by(tmp_db, 0, 0);
+			sort_by_var(0, 0);
 			break;
 		case(6):
-			std::cout << "Type average to sort" << std::endl;
-			std::cin >> tmp_db;
-			sort_by(tmp_db, 0, 1);
+			sort_by_var( 1, 0);
 			break;
 		case(7):
-			std::cout << "Type class to sort" << std::endl;
-			std::cin >> tmp_int;
-			sort_by(tmp_int, 1, 0);
+			sort_by_var( 0, 1);
 			break;
 		case(8):
-			std::cout << "Type surname to sort" << std::endl;
-			std::cin >> tmp_int;
-			sort_by(tmp_int, 1, 1);
+			sort_by_var(1, 1);
 			break;
 		default:
 			std::cout << "Invalid value" << std::endl;
@@ -471,10 +531,10 @@ void Base::menu_for_sort() {
 		std::cin.clear();
 		}
 		std::cout << "Welcome to sort menu" << std::endl <<
-			"1. Sort by name falling" << std::endl << "2. Sort by name raising" << std::endl <<
-			"3. Sort by surname falling" << std::endl << "4. Sort by surname raising" << std::endl <<
-			"5. Sort by average falling" << std::endl << "6. Sort by average raising" << std::endl <<
-			"7. Sort by class falling" << std::endl << "8. Sort by class raising" << std::endl <<
+			"1. Sort by name raising" << std::endl << "2. Sort by name falling" << std::endl <<
+			"3. Sort by surname raising" << std::endl << "4. Sort by surname falling" << std::endl <<
+			"5. Sort by average raising" << std::endl << "6. Sort by average falling" << std::endl <<
+			"7. Sort by class raising" << std::endl << "8. Sort by class falling" << std::endl <<
 			"Press x to exit" << std::endl << "---------------------------------------------------------------------------------------"
 			<< std::endl;
 	}
@@ -491,7 +551,7 @@ void Base::add_for_read_file(const Student &x) {
 void Base::remove() {
 	std::cout << "Welcome in program to delete Student" << std::endl;
 	show_students();
-	std::cout << " Insert a student number that you want to delete:" << std::endl;
+	std::cout << " Insert a Student number that you want to delete:" << std::endl;
 	char b;
 	while (std::cin >> b && b != 'x') {
 		if (isdigit(b)) {
@@ -503,18 +563,19 @@ void Base::remove() {
 		std::cout << "Press k to exit or insert new number" << std::endl;
 	}
 }
-void Base::sort_by(const std::string& x, bool slope, bool mode){ // slop 0 fallig slop 1 rise   , mode 0 sort by name mode 1 sort by surname
-	std::string tmp, tmp_var;
+// Lambda power
+void Base::sort_by_str(bool slope, bool mode) { // slop 0 fallig slop 1 rise   , mode 0 sort by name mode 1 sort by surname
+	/*std::string tmp, tmp_var;
 	int index_tmp = 0,index_h=0;
 	int i = 0;
-
+	int size = data.size();
+	*/
 	if (mode == 0 && slope == 0) { //by name falling
-		//std::sort(data.begin(), data.end(), comp_name_for_sort);   for example
-
-		for (auto& c : data) {
+		std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_name() < b->get_name(); });
+		/*for (auto& c : data) {
 			tmp_var = c->get_name();
 			index_tmp = i;
-			while (index_tmp < count) {
+			while (index_tmp < size) {
 				tmp = data[index_tmp]->get_name();
 				if (tmp < tmp_var) {
 					std::swap(c, data[index_tmp]);
@@ -523,15 +584,15 @@ void Base::sort_by(const std::string& x, bool slope, bool mode){ // slop 0 falli
 				index_tmp++;
 			}
 			i++;
-		}
+		}*/
 
 	}
 	else if (mode == 0 && slope == 1) { // by name raising
-		//std::sort(data.begin(), data.end(), !comp_name_for_sort); for example
-		for (auto& c : data) {
+		std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_name() > b->get_name(); });
+		/*for (auto& c : data) {
 			tmp_var = c->get_name();
 			index_tmp = i;
-			while (index_tmp < count) {
+			while (index_tmp < size) {
 				tmp = data[index_tmp]->get_name();
 				if (tmp > tmp_var) {
 					std::swap(c, data[index_tmp]);
@@ -541,15 +602,17 @@ void Base::sort_by(const std::string& x, bool slope, bool mode){ // slop 0 falli
 			}
 			i++;
 		}
+		*/
 
 	}
 	else {
 		if (mode == 1 && slope == 0) {// by surname falling
-			//std::sort(data.begin(), data.end(), comp_surname_for_sort); for example
+			std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_surname() < b->get_surname(); });
+			/*
 			for (auto& c : data) {
 				tmp_var = c->get_surname();
 				index_tmp = i;
-				while (index_tmp < count) {
+				while (index_tmp < size) {
 					tmp = data[index_tmp]->get_surname();
 					if (tmp < tmp_var) {
 						std::swap(c, data[index_tmp]);
@@ -559,14 +622,16 @@ void Base::sort_by(const std::string& x, bool slope, bool mode){ // slop 0 falli
 				}
 				i++;
 			}
+			*/
 
 		}
-		else { // by surname raising
+		else if (mode == 1 && slope == 1 ){ // by surname raising
+			std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_surname() > b->get_surname(); });
+			/*
 			for (auto& c : data) {
-				//std::sort(data.begin(), data.end(), !comp_surname_for_sort); for example
 				tmp_var = c->get_surname();
 				index_tmp = i;
-				while (index_tmp < count) {
+				while (index_tmp < size) {
 					tmp = data[index_tmp]->get_surname();
 					if (tmp > tmp_var) {
 						std::swap(c, data[index_tmp]);
@@ -577,19 +642,26 @@ void Base::sort_by(const std::string& x, bool slope, bool mode){ // slop 0 falli
 				i++;
 			}
 		}
-	}
+		*/
+		}
 
+	}
 }
-void Base::sort_by(double x, bool slope, bool mode) { // slop 0 fallig slop 1 rise   , mode 0 sort by average mode 1 sort by class
+void Base::sort_by_var( bool slope, bool mode) { // slop 0 fallig slop 1 rise   , mode 0 sort by average mode 1 sort by class
+	/*
 	double tmp, tmp_var;
 	int index_tmp = 0, index_h = 0;
 	int i = 0;
+	int size = data.size();
+	*/
+	
 	if (mode == 0 && slope == 0) { //by average falling
-		//std::sort(data.begin(), data.end(), comp_average_for_sort); for example
+		std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_average() < b->get_average(); });
+		/*
 		for (auto& c : data) {
 			tmp_var = c->get_average();
 			index_tmp = i;
-			while (index_tmp < count) {
+			while (index_tmp < size) {
 				tmp = data[index_tmp]->get_average();
 				if (tmp < tmp_var) {
 					std::swap(c, data[index_tmp]);
@@ -599,14 +671,16 @@ void Base::sort_by(double x, bool slope, bool mode) { // slop 0 fallig slop 1 ri
 			}
 			i++;
 		}
+		*/
 
 	}
 	else if (mode == 0 && slope == 1) { // by average raising
-		//std::sort(data.begin(), data.end(), !comp_average_for_sort); for example
+		std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_average() > b->get_average(); });
+		/*
 		for (auto& c : data) {
 			tmp_var = c->get_average();
 			index_tmp = i;
-			while (index_tmp < count) {
+			while (index_tmp < size) {
 				tmp = data[index_tmp]->get_average();
 				if (tmp > tmp_var) {
 					std::swap(c, data[index_tmp]);
@@ -616,15 +690,16 @@ void Base::sort_by(double x, bool slope, bool mode) { // slop 0 fallig slop 1 ri
 			}
 			i++;
 		}
-
+		*/
 	}
 	else {
 		if (mode == 1 && slope == 0) {// by class falling
-			//std::sort(data.begin(), data.end(), comp_class_for_sort); for example
+			std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_class() < b->get_class(); });
+			/*
 			for (auto& c : data) {
 				tmp_var = c->get_class();
 				index_tmp = i;
-				while (index_tmp < count) {
+				while (index_tmp < size) {
 					tmp = data[index_tmp]->get_class();
 					if (tmp < tmp_var) {
 						std::swap(c, data[index_tmp]);
@@ -634,14 +709,16 @@ void Base::sort_by(double x, bool slope, bool mode) { // slop 0 fallig slop 1 ri
 				}
 				i++;
 			}
+			*/
 
 		}
-		else { // by class raising
-			//std::sort(data.begin(), data.end(), !comp_class_for_sort); for example
+		else if(mode==1 && slope==1){ // by class raising
+			std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_class() > b->get_class(); });
+			/*
 			for (auto& c : data) {
 				tmp_var = c->get_class();
 				index_tmp = i;
-				while (index_tmp < count) {
+				while (index_tmp < size) {
 					tmp = data[index_tmp]->get_class();
 					if (tmp > tmp_var) {
 						std::swap(c, data[index_tmp]);
@@ -651,18 +728,35 @@ void Base::sort_by(double x, bool slope, bool mode) { // slop 0 fallig slop 1 ri
 				}
 				i++;
 			}
+			*/
 		}
 
 
 	}
 }
+void Base::show_menu() {
+	std::cout << "			Welcome to main menu of the program" << std::endl
+		<< "---------------------------------------------------------------------------------------" << std::endl << std::endl
+		<< "				Made by Mateusz Stopa" << std::endl << "---------------------------------------------------------------------------------------" << std::endl << std::endl
+		<< "Select options that you want:" << std::endl << "1.Add Student" << std::endl <<
+		"2.Modify Student" << std::endl << "3.Remove Student" << std::endl << "4.Add Marks" << std::endl << "5.Modify marks/Delete marks" << std::endl << "6.Delete all marks of Student" << std::endl
+		<< "7.Show Student" << std::endl << "8.Show all Students" << std::endl
+		<< "9.Show all Students by name" << std::endl << "10.Show all Students by surname" << std::endl <<
+		"11.Show all Students by class" << std::endl << "12.Show all Students by above input average" << std::endl <<
+		"13.Menu sort" << std::endl <<
+		"14.Read base data from file" << std::endl << "15.Write base data to file" << std::endl << "16.Specify name of file to write" << std::endl <<
+		"Press k to exit" << std::endl << std::endl << "---------------------------------------------------------------------------------------"<<std::endl
+		<< "At the end of the program, program will sort Students by class raising and autosave." << std::endl <<
+		"Notice: Autosave will automate save base data to file: " << file_name_write << " at the end of the program" << std::endl;
+
+}
 void Base::show_tab() {
-	std::cout << "Students list:" << std::endl << "-------------------------------------------"
-		<< std::endl << "-------------------------------------------" << std::endl <<
-		"Lp.	Name	Surname		Class	Average" << std::endl << "-------------------------------------------" << std::endl;
+	std::cout << "Students list:" << std::endl << "--------------------------------------------------------------------------------------"
+		<< std::endl << "--------------------------------------------------------------------------------------" << std::endl <<
+		"Nr.	 Name	        Surname        Class	Average" << std::endl << "--------------------------------------------------------------------------------------" << std::endl;
 }
 void Base::show_by_name() {
-	std::cout << "Type name of student:" << std::endl;
+	std::cout << "Type name of Student:" << std::endl;
 	std::string tmp;
 	std::cin >> tmp;
 	short i = 1;
@@ -670,13 +764,14 @@ void Base::show_by_name() {
 	for (auto& c : data) {
 		if (c->comp_name(tmp)) {
 			std::cout << i << ". ";
-			c->show_student();
+			c->show_student(i);
 			i++;
 		}
 	}
+	std::cout << std::endl;
 }
 void Base::show_by_surname() {
-	std::cout << "Type surname of student:" << std::endl;
+	std::cout << "Type surname of Student:" << std::endl;
 	std::string tmp;
 	std::cin >> tmp;
 	short i = 1;
@@ -684,10 +779,11 @@ void Base::show_by_surname() {
 	for (auto& c : data) {
 		if (c->comp_surname(tmp)) {
 			std::cout << i << ". ";
-			c->show_student();
+			c->show_student(i);
 			i++;
 		}
 	}
+	std::cout << std::endl;
 }
 void Base::show_by_class() {
 	std::cout << "Type class" << std::endl;
@@ -699,7 +795,7 @@ void Base::show_by_class() {
 		for (auto& c : data) {
 			if (c->comp_class(tmp)) {
 				std::cout << i << ". ";
-				c->show_student();
+				c->show_student(i);
 				i++;
 			}
 		}
@@ -707,6 +803,7 @@ void Base::show_by_class() {
 	else {
 		std::cout << "Invalid value" << std::endl;
 	}
+	std::cout << std::endl;
 
 }
 void Base::show_by_mark() {
@@ -719,7 +816,7 @@ void Base::show_by_mark() {
 		for (auto& c : data) {
 			if (c->comp_mark(tmp)) {
 				std::cout << i << ". ";
-				c->show_student();
+				c->show_student(i);
 				i++;
 			}
 		}
@@ -727,6 +824,7 @@ void Base::show_by_mark() {
 	else {
 		std::cout << "Invalid value" << std::endl;
 	}
+	std::cout << std::endl;
 
 }
 void Base::show_students() {
@@ -734,7 +832,7 @@ void Base::show_students() {
 	show_tab();
 	for(auto &b:data) {
 		std::cout << i << ". ";
-		b->show_student();
+		b->show_student(i);
 		i++;
 	}
 	std::cout << std::endl;
@@ -753,10 +851,12 @@ void Base::read() {
 	int tmp_class;
 	double tmp_average;
 	double tmp_averages_subjects[8];
-	std::array<std::vector<double>, 8> c{};
+	std::array<std::vector<double>,8> c;
 	int  index_o;
 	int max_mark, tmp_mark;
 	int count_x = 0;
+	int tmp_of_good_mark;
+	double tmp_of_good_average;
 	while (std::getline(file, tmp)) {
 		if (tmp.size() > 4) {
 			index_o = tmp.find(' ');
@@ -774,14 +874,15 @@ void Base::read() {
 			while (count_x < 8) {
 				index_o = tmp.find(' ');
 				tmp.erase(0, index_o+1);
-				tmp_averages_subjects[count_x] = std::stod(tmp);
-
+				tmp_of_good_average = std::stod(tmp);
+				if(tmp_of_good_average > 0 && tmp_of_good_average < 7) tmp_averages_subjects[count_x] =tmp_of_good_average;
 				index_o = tmp.find(':');
 				tmp.erase(0, index_o + 1);
 				tmp_mark = 0;
 				max_mark = tmp.find('X');
 				while (tmp_mark < max_mark) { // i use it for good validate marks
-					c[count_x].push_back(std::stoi(tmp));
+					tmp_of_good_mark=std::stoi(tmp);
+					if (tmp_of_good_mark > 0 && tmp_of_good_mark <7)c[count_x].push_back(std::stoi(tmp));
 					tmp.erase(0, 2);
 					tmp_mark += 2;
 				}
@@ -800,7 +901,7 @@ void Base::write_file_b() {
 	for (auto& b : data) {
 		b->write_file_s(file);
 	}
-	std::cout << " Succesfully writed!" << std::endl;
+	std::cout << "Succesfully writed!" << std::endl;
 	file.close();
 }
 

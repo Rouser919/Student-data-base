@@ -5,6 +5,7 @@
 #include <numeric> 
 #include <memory>
 #include<array>
+#include <cctype>
 class Student
 {
 	std::string name;
@@ -18,6 +19,7 @@ class Student
 	void set_ave_marks() { average = (double)std::accumulate(average_of_school_subjects, average_of_school_subjects + 8, 0.0) / 8.0; }
 	bool good_mark(int n) { if (n > 48 && n < 55) return 1; else return 0; }
 	bool good_class(int n) { if (n > 0 && n < 5) return 1; else return 0; }
+	std::string& parse(std::string& x);
 public:
 	Student(std::string& _name, std::string& _surname, int _class);
 	Student(std::string& _name, std::string& _surname, int _class, double ave[8], x &b, double aver);
@@ -36,9 +38,10 @@ public:
 	void add_marks();
 	void delete_marks();
 	void modify_marks();
+	void show_for_menu_person();
 	void show_1(const int n) ;
-	void show_student();
-	// ADD FUNTION TO INITITE PERSON
+	void show_student( int n);
+	void add_personal();
 	void edit();
 	void write_file_s(std::fstream& x);
 	~Student() {};
@@ -54,20 +57,17 @@ class Base {
 	void change_name_student();
 	void add_for_read_file(const Student& x);
 	void add_for_menu();
+	void show_menu();
 public:
 	Base();
 	Base(int _count);
 	~Base();
-	bool comp_name_for_sort(const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) { return a->get_name() < b->get_name(); }
-	bool comp_surname_for_sort(const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) { return a->get_surname() < b->get_surname(); }
-	bool comp_average_for_sort(const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) { return a->get_average() < b->get_average(); }
-	bool comp_class_for_sort(const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) { return a->get_class() < b->get_class();}
 	void menu();
 	void menu_for_sort();
 	void modify();
 	void remove();
-	void sort_by(const std::string &x,bool slope,bool mode );
-	void sort_by(double x, bool slope, bool mode);
+	void sort_by_str(bool slope,bool mode );
+	void sort_by_var(bool slope, bool mode);
 	void show_tab();
 	void show_by_name();
 	void show_by_surname();
