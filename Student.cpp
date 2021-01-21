@@ -76,6 +76,7 @@ Student::Student(const Student& x) {
 	marks = x.marks;
 	average = x.average;
 	std::memcpy(average_of_school_subjects, x.average_of_school_subjects, sizeof(double)*8);
+	set_ave_of_scho_sub();
 }
 Student& Student::operator=(const Student& x) {
 	name = x.name;
@@ -158,7 +159,7 @@ void Student::modify_marks() {
 		if (tmp == '1') {
 			std::cout << "What value u want to modify?" << std::endl;
 			std::cin >> tmp;
-				if (marks[x-49].size() > tmp-48 && tmp-48 >= 0) {
+				if (marks[x-49].size() >= tmp-48 && tmp-48 >= 0) {
 					std::cout << "Enter new Value" << std::endl;
 					std::cin >> tmp_2;
 					if (good_mark(tmp_2)) {
@@ -655,6 +656,7 @@ void Base::sort_by_var( bool slope, bool mode) { // slop 0 fallig slop 1 rise   
 	int size = data.size();
 	*/
 	
+	
 	if (mode == 0 && slope == 0) { //by average falling
 		std::sort(data.begin(), data.end(), [](const std::unique_ptr<Student>& a, const std::unique_ptr<Student>& b) {return a->get_average() < b->get_average(); });
 		/*
@@ -859,6 +861,10 @@ void Base::read() {
 	double tmp_of_good_average;
 	while (std::getline(file, tmp)) {
 		if (tmp.size() > 4) {
+			for (auto& x : c) {
+				x.clear();
+			}
+			count_x = 0;
 			index_o = tmp.find(' ');
 			tmp_name = tmp.substr(0, index_o);
 			tmp.erase(0, index_o+1 ); //// remeber of one space; if needed +1 all index_o

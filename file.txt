@@ -1,26 +1,40 @@
-Anna Kucharczyk Class:1 Average of marks:4.75 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Anna Kucharczyk Class:1 Average of marks:3.59375 English: 4.75 Marks:3,5,5,6,XMathematic: 4.5 Marks:5,4,XBiology: 3.5 Marks:5,4,3,2,XHistory: 3.5 Marks:4,3,XPhysics: 3 Marks:4,3,2,XChemistry: 3 Marks:4,3,3,2,XEthic/Religion: 3 Marks:4,3,2,XP.E: 3.5 Marks:4,3,X
 
-Bartlomiej Grodzki Class:1 Average of marks:2.5 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Bartlomiej Grodzki Class:1 Average of marks:2.25 English: 3 Marks:3,XMathematic: 2 Marks:2,XBiology: 2 Marks:2,XHistory: 1 Marks:1,XPhysics: 2 Marks:2,XChemistry: 3 Marks:3,XEthic/Religion: 2 Marks:2,XP.E: 3 Marks:3,X
 
-Patryk Zajac Class:1 Average of marks:2.375 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Patryk Zajac Class:1 Average of marks:2.125 English: 1 Marks:1,XMathematic: 2 Marks:2,XBiology: 3 Marks:3,XHistory: 3 Marks:3,XPhysics: 4 Marks:4,XChemistry: 1 Marks:XEthic/Religion: 1 Marks:1,XP.E: 2 Marks:2,X
+
+Piotr Szostak Class:1 Average of marks:3.75 English: 1 Marks:1,XMathematic: 6 Marks:6,XBiology: 3 Marks:3,XHistory: 5 Marks:5,XPhysics: 6 Marks:6,XChemistry: 1 Marks:XEthic/Religion: 2 Marks:2,XP.E: 6 Marks:6,X
+
+Sebastian Baran Class:1 Average of marks:3.75 English: 2 Marks:2,XMathematic: 4 Marks:4,XBiology: 4 Marks:4,XHistory: 4 Marks:4,XPhysics: 3 Marks:3,XChemistry: 6 Marks:6,XEthic/Religion: 3 Marks:3,XP.E: 4 Marks:4,X
+
+Marta Zmuda Class:1 Average of marks:2.125 English: 3 Marks:3,XMathematic: 2 Marks:2,XBiology: 4 Marks:4,XHistory: 4 Marks:4,XPhysics: 1 Marks:XChemistry: 1 Marks:XEthic/Religion: 1 Marks:XP.E: 1 Marks:X
+
+Grzegorz Krol Class:2 Average of marks:1.5 English: 3 Marks:3,XMathematic: 1 Marks:XBiology: 3 Marks:3,XHistory: 1 Marks:1,XPhysics: 1 Marks:XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:1,XP.E: 1 Marks:X
+
+Dominik Lukasinski Class:2 Average of marks:2.875 English: 3 Marks:3,XMathematic: 3 Marks:3,XBiology: 6 Marks:6,XHistory: 2 Marks:2,XPhysics: 1 Marks:1,XChemistry: 2 Marks:2,XEthic/Religion: 3 Marks:3,XP.E: 3 Marks:3,X
 
 Alicja Kijewska Class:2 Average of marks:2.375 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
 
-Kamil Paciora Class:2 Average of marks:2.72917 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Kamil Paciora Class:2 Average of marks:3.25 English: 2 Marks:3,2,1,2,XMathematic: 4.5 Marks:5,4,XBiology: 3.5 Marks:5,4,3,2,XHistory: 3.5 Marks:4,3,XPhysics: 3 Marks:4,3,2,XChemistry: 3 Marks:4,3,3,2,XEthic/Religion: 3 Marks:4,3,2,XP.E: 3.5 Marks:4,3,X
 
-Mateusz Rudzki Class:2 Average of marks:1 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Mateusz Rudzki Class:2 Average of marks:3.25 English: 2 Marks:3,2,1,2,XMathematic: 4.5 Marks:5,4,XBiology: 3.5 Marks:5,4,3,2,XHistory: 3.5 Marks:4,3,XPhysics: 3 Marks:4,3,2,XChemistry: 3 Marks:4,3,3,2,XEthic/Religion: 3 Marks:4,3,2,XP.E: 3.5 Marks:4,3,X
 
-Piotr Kuczma Class:3 Average of marks:3.25 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Adrian Krol Class:3 Average of marks:3.25 English: 2 Marks:2,XMathematic: 4 Marks:4,XBiology: 3 Marks:3,XHistory: 3 Marks:3,XPhysics: 4 Marks:4,XChemistry: 3 Marks:3,XEthic/Religion: 3 Marks:3,XP.E: 4 Marks:4,X
 
-Andrzej Lipkowski Class:3 Average of marks:3.875 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Piotr Kuczma Class:3 Average of marks:3.25 English: 2 Marks:3,2,1,2,XMathematic: 4.5 Marks:5,4,XBiology: 3.5 Marks:5,4,3,2,XHistory: 3.5 Marks:4,3,XPhysics: 3 Marks:4,3,2,XChemistry: 3 Marks:4,3,3,2,XEthic/Religion: 3 Marks:4,3,2,XP.E: 3.5 Marks:4,3,X
 
-Jan Stalmach Class:3 Average of marks:4.25 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Andrzej Lipkowski Class:3 Average of marks:3.25 English: 2 Marks:3,2,1,2,XMathematic: 4.5 Marks:5,4,XBiology: 3.5 Marks:5,4,3,2,XHistory: 3.5 Marks:4,3,XPhysics: 3 Marks:4,3,2,XChemistry: 3 Marks:4,3,3,2,XEthic/Religion: 3 Marks:4,3,2,XP.E: 3.5 Marks:4,3,X
 
-Marta Kowalczyk Class:3 Average of marks:4.375 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Jan Stalmach Class:3 Average of marks:3.25 English: 2 Marks:3,2,1,2,XMathematic: 4.5 Marks:5,4,XBiology: 3.5 Marks:5,4,3,2,XHistory: 3.5 Marks:4,3,XPhysics: 3 Marks:4,3,2,XChemistry: 3 Marks:4,3,3,2,XEthic/Religion: 3 Marks:4,3,2,XP.E: 3.5 Marks:4,3,X
 
-Lukasz Bielik Class:4 Average of marks:1.5 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Marta Kowalczyk Class:3 Average of marks:3.25 English: 2 Marks:3,2,1,2,XMathematic: 4.5 Marks:5,4,XBiology: 3.5 Marks:5,4,3,2,XHistory: 3.5 Marks:4,3,XPhysics: 3 Marks:4,3,2,XChemistry: 3 Marks:4,3,3,2,XEthic/Religion: 3 Marks:4,3,2,XP.E: 3.5 Marks:4,3,X
 
-Katarzyna Kubowicz Class:4 Average of marks:2.625 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Grzegorz Wlazlo Class:4 Average of marks:3.5 English: 3 Marks:3,XMathematic: 4 Marks:4,XBiology: 4 Marks:4,XHistory: 5 Marks:5,XPhysics: 2 Marks:2,XChemistry: 4 Marks:4,XEthic/Religion: 3 Marks:3,XP.E: 3 Marks:3,X
 
-Karolina Majka Class:4 Average of marks:2.625 English: 1 Marks:XMathematic: 4 Marks:4,XBiology: 5 Marks:5,XHistory: 1 Marks:1,XPhysics: 3 Marks:3,XChemistry: 1 Marks:1,XEthic/Religion: 1 Marks:XP.E: 3 Marks:3,X
+Lukasz Bielik Class:4 Average of marks:1.5 English: 1 Marks:1,XMathematic: 1 Marks:XBiology: 1 Marks:XHistory: 1 Marks:XPhysics: 1 Marks:XChemistry: 1 Marks:XEthic/Religion: 1 Marks:XP.E: 5 Marks:5,X
+
+Katarzyna Kubowicz Class:4 Average of marks:2.625 English: 3 Marks:3,XMathematic: 1 Marks:XBiology: 5 Marks:5,XHistory: 1 Marks:XPhysics: 3 Marks:3,XChemistry: 1 Marks:XEthic/Religion: 3 Marks:3,XP.E: 4 Marks:4,X
+
+Karolina Majka Class:4 Average of marks:2.625 English: 2 Marks:2,XMathematic: 1 Marks:XBiology: 1 Marks:XHistory: 3 Marks:3,XPhysics: 5 Marks:5,XChemistry: 6 Marks:6,XEthic/Religion: 1 Marks:XP.E: 2 Marks:2,X
 

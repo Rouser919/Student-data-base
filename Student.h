@@ -49,7 +49,7 @@ public:
 };
 
 class Base {
-	std::vector<std::unique_ptr<Student>> data;// https://cpp-polska.pl/post/kompendium-wiedzy-o-smart-pointerach
+	std::vector<std::unique_ptr<Student>> data;
 	static int count;
 	std::string file_name_read;
 	std::string file_name_write;
