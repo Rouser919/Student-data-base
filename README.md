@@ -8,4 +8,4 @@ In future I will add mysql base option to this project
 
 19.01.2021 Bugfix all functions without read. (Update) Finish other functions(sorts,shows). Repair function write and read, bugfix other functions without sorts. Sorts I will bugfix tomorrow. In the next day I will probably finish projects with bugfix and other stuff.
 
-20.01.2021 Almost done, bugfix functions, optimize, add new functions, add some validate and good looking. Sort is done just i need to build a new constructor to std::array
+20.01.2021 Almost done, bugfix functions, optimize, add new functions, add some validate and good looking. Sort is done
