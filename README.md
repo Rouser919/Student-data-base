@@ -2,7 +2,7 @@
 C++ 
 In future I will add mysql base option to this project
 
-Student data base could be used for collect data about students. We can add, delete or modify students here. Moreover, there is a options to add,modify or delete marks of specify student. This program also calculate averages of subjects, search students and shows for specify name, surname, average and class. Another function is sorting students in data base by specify criterion. Additionally there is option to read data from files and save data base to a file. Besides, program will automate save data base to a specify file and sort by class raising.
+Student data base could be used for collect data about students. We can add, delete or modify students here. Moreover, there is a options to add, modify or delete marks of specify student. This program also calculate averages of subjects, search students and shows for specify name, surname, average and class. Another function is sorting students in data base by specify criterion. Additionally there is option to read data from files and save data base to a file. Besides, program will automate save data base to a specify file and sort by class raising.
 
 I learned there some new things:
 
