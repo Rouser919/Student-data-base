@@ -10,7 +10,7 @@ I learned there some new things:
 
 -How to use smart pointers,
 
--How to create a project.
+-How to build a project
 
 17.01.2021 Add base class with some definitions  Add functions to modify/erase/add marks
 
